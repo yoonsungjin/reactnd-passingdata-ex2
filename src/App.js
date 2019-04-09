@@ -105,20 +105,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <ul>
         <h2>How Popular is Your Favorite Movie?</h2>
- 		  {
-          	profiles.map( profile => {
-            	//const title = movies[profile.id].name;
-				const favMovie = movies.map( movie => { return movie;} );
-				return(
-                	<h2>{favMovie.name}</h2>
-                );
-            
-				} )
-          }
-
-        </ul>	
       </div>
     );
   }
