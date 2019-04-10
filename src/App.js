@@ -98,6 +98,20 @@ const movies = {
 };
 
 class App extends Component {
+   constructor(props) {
+    super(props);
+    this.usersByMovie = {};
+
+    profiles.forEach(profile => {
+      const movieID = profile.favoriteMovieID;
+
+      if (this.usersByMovie[movieID]) {
+        this.usersByMovie[movieID].push(profile.userID);
+      } else {
+        this.usersByMovie[movieID] = [profile.userID];
+      }
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -106,6 +120,38 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <h2>How Popular is Your Favorite Movie?</h2>
+
+        <ul>
+          {Object.keys(movies).map(key => {
+            const userIDs = this.usersByMovie[movies[key].id];
+
+            return (
+              <li key={movies[key].id}>
+                <h2>{movies[key].name}</h2>
+                <h3>Liked By:</h3>
+
+                {!userIDs ? (
+                  <h4>None of the current users liked this movie</h4>
+                ) : (
+                  ""
+                )}
+
+                <ul>
+                  {userIDs &&
+                    userIDs.map(userId => {
+                      return (
+                        <li key={userId}>
+                          <p>{users[userId].name}</p>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </li>
+            );
+          })}
+        </ul>
+
+
       </div>
     );
   }
